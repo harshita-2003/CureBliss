@@ -1,6 +1,7 @@
 import { usePrivy } from '@privy-io/react-auth';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useStateContext } from '../context';
 
 const Onboarding = () => {
     const [username , setUsername] = useState('');
@@ -8,11 +9,25 @@ const Onboarding = () => {
     const [location , setLocation] = useState('');
     const navigate = useNavigate();
     const { user } = usePrivy();
+    console.log(user);
 
-    const handleOnboarding = (e) => {
+    const { createUser } = useStateContext();
+
+    const handleOnboarding = async (e) => {
         e.preventDefault();
 
+        const userData = {
+          username ,
+          age : parseInt(age ,10),
+          location,
+          created_by : user.email.address
+        }
         console.log(username, age, location);
+
+        const newUser = await createUser(userData);
+        if (newUser) {
+          navigate('/profile');
+        }
     }
 
     return (
