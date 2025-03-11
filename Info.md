@@ -7,3 +7,6 @@ Authentication - Privy
 Database Interaction - drizzle
                      - postgreSQL
                      - neon
+
+
+to update tables : npm run db:push

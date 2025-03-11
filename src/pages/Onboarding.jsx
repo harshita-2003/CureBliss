@@ -16,12 +16,19 @@ const Onboarding = () => {
     const handleOnboarding = async (e) => {
         e.preventDefault();
 
-        const userData = {
-          username ,
-          age : parseInt(age ,10),
-          location,
-          created_by : user.email.address
+        const userEmail = user?.email?.address;
+        if (!userEmail) {
+          console.error("User email is missing!");
+          return;
         }
+
+        const userData = {
+          username,
+          age: parseInt(age, 10),
+          location,
+          createdBy: user.email.address 
+        }
+        
         console.log(username, age, location);
 
         const newUser = await createUser(userData);

@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import { Home , Onboarding, Profile } from './pages'
-
+import MedicalRecord from './pages/records/index'
 import { useStateContext } from './context'
 import { usePrivy } from '@privy-io/react-auth'
 
@@ -16,10 +16,12 @@ const App = () => {
 
     useEffect(() => {
       if (ready && !authenticated) {
+        console.log("Attempting login...");
         login();
-      }else if (user && !currentUser) {
-        navigate('/onboarding');
       }
+    // else if (user && !currentUser) {
+    //     navigate('/onboarding');
+    //   }
     } , [ready,authenticated,user,currentUser])
     
     return (
@@ -33,10 +35,10 @@ const App = () => {
 
                 <Routes>
                     <Route path='/' element = {<Home />} />
-                    <Route path='/medical-records' element = {<div>Medical Records</div>} />
-                    <Route path='/screening-schedules' element = {<div>Screening Schedules</div>} />
                     <Route path='/profile' element = {<Profile />} />
                     <Route path='/onboarding' element = {<Onboarding />} />
+                    <Route path='/medical-records' element = {<MedicalRecord />} />
+                    <Route path='/screening-schedules' element = {<div>Screening Schedules</div>} />
                     <Route path='*' element = {<div>Not Found</div>} />
                 </Routes>
 

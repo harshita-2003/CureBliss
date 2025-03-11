@@ -10,4 +10,14 @@ export default defineConfig({
     },
   },
   base: "./",
+
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://auth.privy.io',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });
