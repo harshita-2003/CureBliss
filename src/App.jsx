@@ -7,6 +7,7 @@ import MedicalRecord from './pages/records/index'
 import { useStateContext } from './context'
 import { usePrivy } from '@privy-io/react-auth'
 import SingleRecordDetails from './pages/records/single-record-details'
+import ScreeningSchedule from './pages/ScreeningSchedules'
 
 const App = () => {
     const { currentUser} = useStateContext();
@@ -31,7 +32,7 @@ const App = () => {
                 <Sidebar />
             </div>
 
-            <div className='mx-auto mt-5 max-w-[1280px] flex-1 max-sm:w-full sm:pr-5'>
+            <div className='mx-auto mt-5 mr-0 max-w-[1280px] flex-1 max-sm:w-full sm:pr-5'>
                 <Navbar />
 
                 <Routes>
@@ -40,7 +41,7 @@ const App = () => {
                     <Route path='/onboarding' element = {<Onboarding />} />
                     <Route path='/medical-records' element = {<MedicalRecord />} />
                     <Route path='/medical-records/:id' element = {<SingleRecordDetails />} />
-                    <Route path='/screening-schedules' element = {<div>Screening Schedules</div>} />
+                    <Route path='/screening-schedules' element = {<ScreeningSchedule />} />
                     <Route path='*' element = {<div>Not Found</div>} />
                 </Routes>
 
