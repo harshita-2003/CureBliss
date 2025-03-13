@@ -32,7 +32,7 @@ const App = () => {
                 <Sidebar />
             </div>
 
-            <div className='mx-auto mt-5 mr-0 max-w-[1280px] flex-1 max-sm:w-full sm:pr-5'>
+            <div className='sm:ml-10 mt-5 mr-0 flex-1 max-sm:w-full sm:pr-5'>
                 <Navbar />
 
                 <Routes>
