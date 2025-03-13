@@ -22,54 +22,49 @@ const DisplayInfo = () => {
     useEffect(() => {
       if (user) {
         fetchUserByEmail(user.email.address)
-          .then(() => {
-            console.log(records);
-            const totalFolders = records.length;
-            let aiPersonalizedTreatment = 0;
-            let totalScreenings = 0;
-            let completedScreenings = 0;
-            let pendingScreenings = 0;
-            let overdueScreenings = 0;
-  
-            records.forEach((record) => {
-              if (record.kanbanRecords) {
-                try {
-                  const kanban = JSON.parse(record.kanbanRecords);
-                  aiPersonalizedTreatment += kanban.columns.some(
-                    (column) => column.title === "AI Personalized Treatment",
-                  )
-                    ? 1
-                    : 0;
-                  totalScreenings += kanban.tasks.length;
-                  completedScreenings += kanban.tasks.filter(
-                    (task) => task.columnId === "done",
-                  ).length;
-                  pendingScreenings += kanban.tasks.filter(
-                    (task) => task.columnId === "doing",
-                  ).length;
-                  overdueScreenings += kanban.tasks.filter(
-                    (task) => task.columnId === "overdue",
-                  ).length;
-                } catch (error) {
-                  console.error("Failed to parse kanbanRecords:", error);
-                }
-              }
-            });
-  
-            setMetrics({
-              totalFolders,
-              aiPersonalizedTreatment,
-              totalScreenings,
-              completedScreenings,
-              pendingScreenings,
-              overdueScreenings,
-            });
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+          .then(() => fetchUserRecords(user.email.address)) 
+          .then(() => console.log("Fetched records:", records));
       }
-    }, [user, fetchUserRecords, records]);
+    }, [user, fetchUserByEmail, fetchUserRecords]);
+
+    useEffect(() => {
+      if (records.length > 0) {
+        let totalFolders = records.length;
+        let aiPersonalizedTreatment = 0;
+        let totalScreenings = 0;
+        let completedScreenings = 0;
+        let pendingScreenings = 0;
+        let overdueScreenings = 0;
+    
+        records.forEach((record) => {
+          if (record.kanbanRecords) {
+            try {
+              const kanban = JSON.parse(record.kanbanRecords);
+              aiPersonalizedTreatment += kanban.columns.some(
+                (column) => column.title === "AI Personalized Treatment",
+              )
+                ? 1
+                : 0;
+              totalScreenings += kanban.columns.length;
+              completedScreenings += kanban.columns.filter(column => column.title === "Completed").length;
+              pendingScreenings += kanban.columns.filter(column => column.title === "Doing").length;
+              overdueScreenings += kanban.columns.filter(column => column.title === "Overdue").length;
+            } catch (error) {
+              console.error("Failed to parse kanbanRecords:", error);
+            }
+          }
+        });
+    
+        setMetrics({
+          totalFolders: records.length,
+          aiPersonalizedTreatment,
+          totalScreenings,
+          completedScreenings,
+          pendingScreenings,
+          overdueScreenings,
+        });
+      }
+    }, [records]);
 
     const metricsData = [
         {
