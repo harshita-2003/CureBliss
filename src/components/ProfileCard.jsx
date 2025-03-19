@@ -16,7 +16,6 @@ const ProfileCard = ({ username, age, email, location }) => {
             <p className="text-sm text-gray-400">{email}</p>
             <p className="text-sm mt-1">{location} | Age: {age}</p>
 
-            {/* Stats */}
             <div className="bg-pink-500 text-white text-sm py-2 px-4 rounded-full mt-4">
                 Have a great Health buddy !!
             </div>

@@ -3,7 +3,7 @@ import React from "react";
 const LoadingPage = () => {
     return (
         <div className="flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg">
+            <div className="flex flex-col items-center p-6 bg-gray-800 shadow-lg rounded-lg">
                 <img
                     src="https://cdnl.iconscout.com/lottie/premium/thumb/loader-dot-dark-point-animation-6790347-5577789.gif"
                     alt="Loading"

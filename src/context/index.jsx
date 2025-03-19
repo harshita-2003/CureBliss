@@ -52,6 +52,31 @@ export const StateContextProvider = ({ children }) => {
       return null;
     }
   }, []);
+
+    // Function to update user profile image
+    const updateUserProfileImg = useCallback(async (userId, profileImgUrl) => {
+      try {
+        const updatedUser = await db
+          .update(Users)
+          .set({ profileImg: profileImgUrl })
+          .where(eq(Users.id, userId))
+          .returning();
+        
+        if (updatedUser.length > 0) {
+          setUsers((prevUsers) =>
+            prevUsers.map((user) =>
+              user.id === userId ? { ...user, profileImg: profileImgUrl } : user
+            )
+          );
+          if (currentUser?.id === userId) {
+            setCurrentUser((prev) => ({ ...prev, profileImg: profileImgUrl }));
+          }
+        }
+      } catch (error) {
+        console.error("Error updating user profile image:", error);
+      }
+    }, [currentUser]);
+  
   
 
   // Function to fetch all records for a specific user
@@ -107,6 +132,7 @@ export const StateContextProvider = ({ children }) => {
         fetchUsers,
         fetchUserByEmail,
         createUser,
+        updateUserProfileImg,
         fetchUserRecords,
         createRecord,
         currentUser,
