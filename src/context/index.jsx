@@ -87,7 +87,7 @@ export const StateContextProvider = ({ children }) => {
   const updateRecord = useCallback(async (recordData) => {
     try {
       const { documentID, ...dataToUpdate } = recordData;
-      console.log(documentID, dataToUpdate);
+      //console.log(documentID, dataToUpdate);
       const updatedRecords = await db
         .update(Records)
         .set(dataToUpdate)

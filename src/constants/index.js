@@ -14,7 +14,7 @@ export const navLinks = [
     {
         name : 'screening',
         imageUrl : screening,
-        link : '/screening-schedules'
+        link : '/onboarding'
     },
     {
         name : 'profile',
