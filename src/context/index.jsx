@@ -53,6 +53,30 @@ export const StateContextProvider = ({ children }) => {
     }
   }, []);  
 
+  //Function to update user 
+  const updateUser = useCallback(async (userData) => {
+    try {
+      const { id, ...dataToUpdate } = userData;
+      const updatedUser = await db
+        .update(Users)
+        .set(dataToUpdate)
+        .where(eq(Users.id, id))
+        .returning()
+        .execute();
+  
+      if (updatedUser.length > 0) {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) => (user.id === id ? updatedUser[0] : user))
+        );
+        return updatedUser[0];
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+      return null;
+    }
+  }, []);
+  
+
   // Function to fetch all records for a specific user
   const fetchUserRecords = useCallback(async (userEmail) => {
     try {
@@ -106,6 +130,7 @@ export const StateContextProvider = ({ children }) => {
         fetchUsers,
         fetchUserByEmail,
         createUser,
+        updateUser,
         fetchUserRecords,
         createRecord,
         currentUser,
