@@ -8,6 +8,8 @@ import { useStateContext } from './context'
 import { usePrivy } from '@privy-io/react-auth'
 import SingleRecordDetails from './pages/records/single-record-details'
 import ScreeningSchedule from './pages/ScreeningSchedules'
+import { Buffer } from "buffer";
+
 
 const App = () => {
     const { currentUser} = useStateContext();
@@ -25,6 +27,10 @@ const App = () => {
     //     navigate('/onboarding');
     //   }
     } , [ready,authenticated,user,currentUser])
+
+    useEffect(() => {
+        window.Buffer = Buffer; // Set Buffer globally
+    }, []);
     
     return (
         <div className='relative flex min-h-screen flex-row bg-[#13131a] px-4'>
