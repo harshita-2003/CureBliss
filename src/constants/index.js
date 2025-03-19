@@ -4,15 +4,15 @@ export const navLinks = [
     {
         name : 'dashboard',
         imageUrl : apps,
-        link : '/'
+        link : '/dashboard'
     },
     {
-        name : 'records',
+        name : 'medical-records',
         imageUrl : records,
         link : '/medical-records'
     },
     {
-        name : 'screening',
+        name : 'onboarding',
         imageUrl : screening,
         link : '/onboarding'
     },

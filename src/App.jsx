@@ -42,7 +42,7 @@ const App = () => {
                 <Navbar />
 
                 <Routes>
-                    <Route path='/' element = {<Home />} />
+                    <Route path='/dashboard' element = {<Home />} />
                     <Route path='/profile' element = {<Profile />} />
                     <Route path='/onboarding' element = {<Onboarding />} />
                     <Route path='/medical-records' element = {<MedicalRecord />} />

@@ -1,7 +1,7 @@
-import React , {useState} from 'react'
+import React , {useEffect, useState} from 'react'
 import { navLinks } from '../constants'
 import { sun } from '../assets'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { IconHeartHandshake } from '@tabler/icons-react'
 
 
@@ -27,6 +27,11 @@ const Icon = ({styles, name, imageUrl, isActive, disabled, handleCLick}) => {
 const Sidebar = () => {
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState('dashboard');
+    const location = useLocation();
+
+    useEffect(() => {
+        setIsActive(location.pathname.split('/')[1]);
+    })
 
     return (
         <div className='sticky top-5 flex h-[93vh] flex-col items-center justify-between'>

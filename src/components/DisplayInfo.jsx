@@ -23,7 +23,7 @@ const DisplayInfo = () => {
       if (user) {
         fetchUserByEmail(user.email.address)
           .then(() => fetchUserRecords(user.email.address)) 
-          .then(() => console.log("Fetched records:", records));
+          // .then(() => console.log("Fetched records:", records));
       }
     }, [user, fetchUserByEmail, fetchUserRecords]);
 
